@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/mananger-users-2/static/css/main.ec34b02e.css",
+    "main.js": "/mananger-users-2/static/js/main.b95bda2f.js",
+    "static/js/787.28cb0dcd.chunk.js": "/mananger-users-2/static/js/787.28cb0dcd.chunk.js",
+    "static/media/logo.svg": "/mananger-users-2/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/mananger-users-2/index.html",
+    "main.ec34b02e.css.map": "/mananger-users-2/static/css/main.ec34b02e.css.map",
+    "main.b95bda2f.js.map": "/mananger-users-2/static/js/main.b95bda2f.js.map",
+    "787.28cb0dcd.chunk.js.map": "/mananger-users-2/static/js/787.28cb0dcd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ec34b02e.css",
+    "static/js/main.b95bda2f.js"
+  ]
+}
