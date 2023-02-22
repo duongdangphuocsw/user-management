@@ -1,0 +1,56 @@
+@import url("https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@200&family=Pacifico&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200&display=swap");
+
+.manager_user_table {
+  margin-right: 0;
+  width: 100%;
+  border-collapse: collapse;
+  tr {
+    text-align: left;
+    &:nth-child(odd) {
+      background: #d1cfcf;
+    }
+    th,
+    td {
+      border: 1px solid #000;
+      padding: 8px;
+      //   font-family: "Roboto Slab", serif;
+    }
+    th {
+      background-color: #eb3926;
+      font-weight: 600;
+      font-size: 20px;
+    }
+    td {
+      font-size: 18px;
+      &.active {
+        color: rgb(60, 173, 60);
+      }
+      &.non_active {
+        color: rgb(245, 0, 0);
+      }
+      &.function-icon-container {
+        text-align: center;
+        font-size: 24px;
+        .functionsIcon {
+          margin: 0 5px;
+          &:hover {
+            cursor: pointer;
+          }
+        }
+        .editIcon {
+          color: rgb(46, 63, 173);
+        }
+        .checkEditIcon {
+          color: rgb(54, 167, 54);
+        }
+        .activeIcon {
+          color: #000;
+        }
+        .deleteIcon {
+          color: rgb(239, 6, 6);
+        }
+      }
+    }
+  }
+}

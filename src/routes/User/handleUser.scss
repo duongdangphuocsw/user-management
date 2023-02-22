@@ -1,0 +1,56 @@
+.controller {
+  display: flex;
+  flex-direction: column;
+  form {
+    display: flex;
+    justify-content: space-around;
+    .formGroup {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      label {
+        font-weight: 600;
+        font-size: 18px;
+        margin-bottom: 5px;
+      }
+      input {
+        width: 250px;
+        padding: 3px;
+        font-size: 16px;
+        border-radius: 5px;
+        text-indent: 5px;
+      }
+      select {
+        width: 200px;
+        height: 28.5px;
+        border-radius: 5px;
+        option {
+          font-size: 18px;
+          padding: 4px;
+        }
+      }
+    }
+  }
+  .function {
+    margin: 20px 0 20px;
+    display: flex;
+    justify-content: space-between;
+    button {
+      margin: 0 15px;
+      font-size: 20px;
+      display: flex;
+      padding: 5px;
+      background-color: rgb(79, 96, 227);
+      border: 1px solid rgb(79, 96, 227);
+      color: #ffff;
+      &:hover {
+        cursor: pointer;
+      }
+      border-radius: 20px;
+      .iconBtn {
+        padding-right: 5px;
+        color: #ffff;
+      }
+    }
+  }
+}
