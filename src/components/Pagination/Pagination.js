@@ -21,7 +21,6 @@ class Pagination extends React.Component {
       perPage: this.props.perPage,
       totalPage: Math.ceil(this.props.users.length / this.props.perPage),
       currentPage: 1,
-      currentUsers: null,
       editUser: {},
       editting: {
         name: "",
@@ -120,7 +119,6 @@ class Pagination extends React.Component {
             },
           })
             .then((response) => {
-              console.log(">> check res: ", response);
               toast.success("Updated succesfully!");
               this.props.handleEditUser(response.data);
             })

@@ -16,9 +16,9 @@ import HandleUser from "./HandleUser";
 class User extends React.Component {
   constructor() {
     super();
+   
     this.state = {
       users: [],
-      statusHandle: "",
       userFilter: undefined,
     };
   }
@@ -44,16 +44,13 @@ class User extends React.Component {
     }
   };
   handleEditUser = (user) => {
-    console.log(user);
     let newListUsers = this.state.users;
     newListUsers = newListUsers.map((item) => {
-      //console.log(item.id === user.id)
       if (item.id === user.id) {
         return user;
       }
       return item;
     });
-    console.log(">> new list user: ", newListUsers);
     this.setState({
       users: [...newListUsers],
     });
@@ -63,8 +60,6 @@ class User extends React.Component {
       users: [...this.state.users, newUser],
     });
   };
-
-  componentDidUpdate = (prevProp, prevState) => {};
   async componentDidMount() {
     axios
       .get("https://631c255e4fa7d3264ca7c5ca.mockapi.io/api/users")
