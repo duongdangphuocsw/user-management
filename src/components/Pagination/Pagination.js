@@ -30,22 +30,29 @@ class Pagination extends React.Component {
       },
     };
   }
-  pagination = () => {
-    let numberUser_props = this.props.users.length;
-    if (this.state.numberUser !== numberUser_props) {
-      this.setState({
-        numberUser: numberUser_props,
-        totalPage: Math.ceil(this.props.users.length / this.props.perPage),
-      });
-    }
+  componentDidMount = () => {
+  };
+  shouldComponentUpdate = (prevProps, prevState) => {
+  
+    this.setState({
+      numberUser: prevProps.users,
+      totalPage:  Math.ceil(prevProps.users.length / prevProps.perPage)
+    })
+    return true
+  }
+  componentDidUpdate = (prevProps, prevState) => {
+    //console.log(">> check component did update" , prevProps, prevState)
+    // this.setState({
+    //   numberUser: prevProps.users.length,
+    //   totalPage: Math.ceil(prevProps.users.length / prevProps.perPage),
+    // });
   };
   // handle edit user
   handleEditUser = (user) => {
     const isEmpty = Object.keys(this.state.editUser).length === 0;
     if (!isEmpty) {
-       toast.error("You are editting another user.")
-      }
-    else {
+      toast.error("You are editting another user.");
+    } else {
       this.setState({
         editUser: user,
         editting: {
@@ -56,14 +63,14 @@ class Pagination extends React.Component {
         },
       });
       let handleKeyDown = (event) => {
-        switch(event.which) {
+        switch (event.which) {
           case 27:
             this.setState({
               editUser: {},
             });
             break;
           default:
-            // code block
+          // code block
         }
       };
       document.addEventListener("keydown", (event) => handleKeyDown(event));
@@ -165,24 +172,24 @@ class Pagination extends React.Component {
       },
     }));
   };
-  // handle change active user 
+  // handle change active user
   handleChangeActiveUser = async (user) => {
-     axios({
-        method: 'put',
-        url: `https://631c255e4fa7d3264ca7c5ca.mockapi.io/api/users/${user.id}`,
-        data: {
-            is_active: !user.is_active
-        }
+    axios({
+      method: "put",
+      url: `https://631c255e4fa7d3264ca7c5ca.mockapi.io/api/users/${user.id}`,
+      data: {
+        is_active: !user.is_active,
+      },
     })
-    .then((response)=> {
-      this.props.handleChangeActive(response.data);
-      toast.success("Changed status succesfully!");
-    })
-    .catch((error)=> {
-      console.log(error)
-      toast.error("Can't change status of user")
-    })
-  }
+      .then((response) => {
+        this.props.handleChangeActive(response.data);
+        toast.success("Changed status succesfully!");
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error("Can't change status of user");
+      });
+  };
   // render current user
   renderUser = (props) => {
     let currentUsers = props.currentUsers;
@@ -263,8 +270,9 @@ class Pagination extends React.Component {
                     />
                   )}
 
-                  <GrUserExpert className="activeIcon functionsIcon" 
-                      onClick={() => this.handleChangeActiveUser(user)}
+                  <GrUserExpert
+                    className="activeIcon functionsIcon"
+                    onClick={() => this.handleChangeActiveUser(user)}
                   />
                   <IoIosTrash
                     className="deleteIcon functionsIcon"
@@ -301,6 +309,7 @@ class Pagination extends React.Component {
     let from = (this.state.currentPage - 1) * this.state.perPage;
     let to = this.state.currentPage * this.state.perPage;
     let currentUsers = this.props.users.slice(from, to);
+
     return currentUsers;
   };
   clickToActive = (indexPage) => {
@@ -324,7 +333,7 @@ class Pagination extends React.Component {
     });
   };
   render() {
-    this.pagination();
+    //this.pagination();
     return (
       <>
         <table className="manager_user_table">

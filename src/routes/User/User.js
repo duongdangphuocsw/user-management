@@ -16,7 +16,6 @@ import HandleUser from "./HandleUser";
 class User extends React.Component {
   constructor() {
     super();
-   
     this.state = {
       users: [],
       userFilter: undefined,
