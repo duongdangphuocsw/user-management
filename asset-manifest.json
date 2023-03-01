@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/mananger-users-reactjs/static/css/main.30d9637c.css",
-    "main.js": "/mananger-users-reactjs/static/js/main.1df0fe93.js",
+    "main.js": "/mananger-users-reactjs/static/js/main.9eb86a82.js",
     "static/js/787.28cb0dcd.chunk.js": "/mananger-users-reactjs/static/js/787.28cb0dcd.chunk.js",
     "static/media/logo.svg": "/mananger-users-reactjs/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/mananger-users-reactjs/index.html",
     "main.30d9637c.css.map": "/mananger-users-reactjs/static/css/main.30d9637c.css.map",
-    "main.1df0fe93.js.map": "/mananger-users-reactjs/static/js/main.1df0fe93.js.map",
+    "main.9eb86a82.js.map": "/mananger-users-reactjs/static/js/main.9eb86a82.js.map",
     "787.28cb0dcd.chunk.js.map": "/mananger-users-reactjs/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.30d9637c.css",
-    "static/js/main.1df0fe93.js"
+    "static/js/main.9eb86a82.js"
   ]
 }
