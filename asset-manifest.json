@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/mananger-users-reactjs/static/css/main.12ff6acf.css",
-    "main.js": "/mananger-users-reactjs/static/js/main.c536f724.js",
+    "main.css": "/mananger-users-reactjs/static/css/main.3e4344e4.css",
+    "main.js": "/mananger-users-reactjs/static/js/main.5c254eae.js",
     "static/js/787.28cb0dcd.chunk.js": "/mananger-users-reactjs/static/js/787.28cb0dcd.chunk.js",
     "static/media/logo.svg": "/mananger-users-reactjs/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/mananger-users-reactjs/index.html",
-    "main.12ff6acf.css.map": "/mananger-users-reactjs/static/css/main.12ff6acf.css.map",
-    "main.c536f724.js.map": "/mananger-users-reactjs/static/js/main.c536f724.js.map",
+    "main.3e4344e4.css.map": "/mananger-users-reactjs/static/css/main.3e4344e4.css.map",
+    "main.5c254eae.js.map": "/mananger-users-reactjs/static/js/main.5c254eae.js.map",
     "787.28cb0dcd.chunk.js.map": "/mananger-users-reactjs/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.12ff6acf.css",
-    "static/js/main.c536f724.js"
+    "static/css/main.3e4344e4.css",
+    "static/js/main.5c254eae.js"
   ]
 }
