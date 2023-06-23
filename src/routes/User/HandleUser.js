@@ -1,76 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import { IoMdPersonAdd, IoMdSearch, IoIosCloseCircle } from "react-icons/io";
 import "./handleUser.scss";
 import { toast } from "react-toastify";
-import axios from "axios";
-class HandleUser extends React.Component {
-  handleChange_inputName = (event) => {
-    this.setState({
-      name: event.target.value,
-    });
+import { addUser } from "../../services/userApi";
+import { useDispatch, useSelector } from "react-redux";
+
+function HandleUser(props) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [group, setGroup] = useState("");
+  const [status, setStatus] = useState("");
+  const users = useSelector((state) => state.user.users )
+  const dispatch = useDispatch();
+  const handleChangeInputName = (event) => {
+    setName(event.target.value);
   };
-  handleChange_inputEmail = (event) => {
-    this.setState({
-      email: event.target.value,
-    });
+
+  const handleChangeInputEmail = (event) => {
+    setEmail(event.target.value);
   };
-  handleChange_groupSelect = (event) => {
-    this.setState({
-      group: event.target.value,
-    });
+
+  const handleChangeGroupSelect = (event) => {
+    setGroup(event.target.value);
   };
-  handleChange_statusSelect = (event) => {
-    this.setState({
-      status: event.target.value !== "" ? event.target.value === "true" : "",
-    });
+
+  const handleChangeStatusSelect = (event) => {
+    setStatus(event.target.value !== "" ? event.target.value === "true" : "");
   };
-  validate = () => {
-    let { name, email, group, state } = this.state;
-    if (name === "" || email === "" || group === "" || state === "")
+
+  const validate = () => {
+    if (name === "" || email === "" || group === "" || status === "") {
       return false;
+    }
     return true;
   };
-  handleAddUser = () => {
-    if (this.validate()) {
-      axios({
-        method: "post",
-        url: "https://631c255e4fa7d3264ca7c5ca.mockapi.io/api/users",
-        data: {
-          name: this.state.name,
-          email: this.state.email,
-          group_role: this.state.group,
-          is_active: this.state.status,
-        },
-      })
-        .then((response) => {
-          this.setState({
-            name: "",
-            email: "",
-          });
-          const listOptionGroupSelect = document.getElementById("group-select").options;
-          const listOptionStatusSelect = document.getElementById("status-select").options
-          listOptionGroupSelect[0].selected = true
-          listOptionStatusSelect[0].selected = true
-          return response;
-        })
-        .then((response) => {
-          this.props.AddUser(response.data);
-          return "Add user succesfull!";
-        })
-        .then((message) => {
-          toast.success(message);
-        })
-        .catch((error) => {
-          console.log(error);
-          toast.error("Can't add user");
-        });
-    } else {
-      toast.error("Please fill all input");
-    }
-  };
-  handleSearchUser = () => {
-    const users = this.props.users;
-    const dataFind = this.state;
+  // SEARCH
+  const handleSearchUser = () => {
+    // const users = props.users;
+    const dataFind = { name, email, group, status };
     //handle filter user
     const userFilter = users.filter((item) => {
       return (
@@ -80,100 +47,143 @@ class HandleUser extends React.Component {
         (dataFind.status === "" ? true : dataFind.status === item.is_active)
       );
     });
-    this.props.SearchUser(userFilter);
+    props.handleSearchUser(userFilter);
   };
-  state = {
-    name: "",
-    email: "",
-    group: "",
-    status: "",
+  // ADD USER
+  const handleAddUser = async () => {
+    if (validate()) {
+      const newUser = {
+        name: name,
+        email: email,
+        group: group,
+        status: status,
+      };
+      try {
+        const response = await addUser(newUser);
+        // handle add user
+        dispatch({
+          type: "ADD",
+          payload: response.data,
+        });
+        // format input
+        setName("");
+        setEmail("");
+        const listOptionGroupSelect =
+          document.getElementById("group-select").options;
+        const listOptionStatusSelect =
+          document.getElementById("status-select").options;
+        listOptionGroupSelect[0].selected = true;
+        listOptionStatusSelect[0].selected = true;
+        // nofify successful
+        toast.success("Add successful");
+      } catch (error) {
+        console.log('error: ', error);
+        toast.error("Can't add user");
+      }
+    } else {
+      toast.error("Please fill all input");
+    }
   };
-  render() {
-    let { name, email, group, status } = this.state;
-    return (
-      <>
-        <div className="controller">
-          <form>
-            <div className="formGroup">
-              <label>Name</label>
-              <input
-                type={"text"}
-                placeholder={"Type name"}
-                value={name}
-                onChange={(event) => this.handleChange_inputName(event)}
-              />
-            </div>
-            <div className="formGroup">
-              <label>Email</label>
-              <input
-                type={"text"}
-                placeholder={"Type email"}
-                value={email}
-                onChange={(event) => this.handleChange_inputEmail(event)}
-              />
-            </div>
-            <div className="formGroup">
-              <label>Group</label>
-              <select
-                name="group"
-                id="group-select"
-                onChange={(event) => this.handleChange_groupSelect(event)}
-              >
-                <option value="">Please Choose Group</option>
-                <option value="Admin">Admin</option>
-                <option value="Reviewer">Reviewer</option>
-                <option value="Editor">Editor</option>
-              </select>
-            </div>
-            <div className="formGroup">
-              <label>Status</label>
-              <select
-                name="status"
-                id="status-select"
-                onChange={(event) => this.handleChange_statusSelect(event)}
-              >
-                <option value="">Please Choose Status</option>
-                <option value="true">Active</option>
-                <option value="false">Not active</option>
-              </select>
-            </div>
-          </form>
-          <div className="function">
-            <button
-              type="button"
-              className="btnAdd"
-              onClick={() => {
-                this.handleAddUser();
-              }}
-            >
-              <IoMdPersonAdd className="iconBtn" />
-              Add new user
-            </button>
-            <button
-              type="button"
-              className="btnFind"
-              onClick={() => {
-                this.handleSearchUser();
-              }}
-            >
-              <IoMdSearch className="iconBtn" />
-              Find
-            </button>
-            <button type="button" className="btnDeleteFind"
-             onClick={() => {
-      
-              console.log(">> check props: " , this.props.handleDeleteFind())
-            }}
-            >
-              <IoIosCloseCircle
-                className="iconBtn"              
-              />
-              Delete find
-            </button>
+  const handleDeleteFind = () => {
+    props.handleDeleteFind();
+    // format input
+    setName("");
+    setEmail("");
+    const listOptionGroupSelect =
+      document.getElementById("group-select").options;
+    const listOptionStatusSelect =
+      document.getElementById("status-select").options;
+    listOptionGroupSelect[0].selected = true;
+    listOptionStatusSelect[0].selected = true;
+  };
+  return (
+    <>
+      <div className="controller">
+        <form>
+          <div className="formGroup">
+            <label>Name</label>
+            <input
+              type={"text"}
+              placeholder={"Type name"}
+              value={name}
+              onChange={(event) => handleChangeInputName(event)}
+            />
           </div>
+          <div className="formGroup">
+            <label>Email</label>
+            <input
+              type={"text"}
+              placeholder={"Type email"}
+              value={email}
+              onChange={(event) => handleChangeInputEmail(event)}
+            />
+          </div>
+          <div className="formGroup">
+            <label>Group</label>
+            <select
+              name="group"
+              id="group-select"
+              onChange={(event) => handleChangeGroupSelect(event)}
+            >
+              <option value="">Please Choose Group</option>
+              <option value="Admin">Admin</option>
+              <option value="Reviewer">Reviewer</option>
+              <option value="Editor">Editor</option>
+            </select>
+          </div>
+          <div className="formGroup">
+            <label>Status</label>
+            <select
+              name="status"
+              id="status-select"
+              onChange={(event) => handleChangeStatusSelect(event)}
+            >
+              <option value="">Please Choose Status</option>
+              <option value="true">Active</option>
+              <option value="false">Not active</option>
+            </select>
+          </div>
+        </form>
+        <div className="function">
+          <button
+            type="button"
+            className="btnAdd"
+            onClick={() => {
+              handleAddUser();
+            }}
+          >
+            <div className="iconBtn">
+              <IoMdPersonAdd />
+            </div>
+
+            <span className="describe">Add new user</span>
+          </button>
+          <button
+            type="button"
+            className="btnFind"
+            onClick={() => {
+              handleSearchUser();
+            }}
+          >
+            <div className="iconBtn">
+              <IoMdSearch className="iconBtn" />
+            </div>
+            <span className="describe">Find</span>
+          </button>
+          <button
+            type="button"
+            className="btnDeleteFind"
+            onClick={() => handleDeleteFind()}
+          >
+            <div className="iconBtn">
+              <IoIosCloseCircle />
+            </div>
+            <span className="describe">Delete find</span>
+          </button>
         </div>
-      </>
-    );
-  }
+      </div>
+    </>
+  );
 }
+
 export default HandleUser;

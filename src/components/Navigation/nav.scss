@@ -7,7 +7,13 @@ nav {
   color: #000;
   position: fixed;
   width: 100%;
-  ul {
+  .listIcon-wrapper {
+    display: none;
+    .listIcon {
+      font-size: 30px;
+    }
+  }
+  ul.nav-pc {
     display: flex;
     list-style: none;
     margin: 0;
@@ -18,6 +24,7 @@ nav {
 
       &:hover {
         color: #ffff;
+        transition: all 0.5s ease-in-out;
       }
       &.active {
         background: #cc0000;
@@ -25,7 +32,68 @@ nav {
       }
     }
   }
+  .nav-mobile {
+    @extend ul.nav-pc;
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 400px;
+    flex-direction: column;
+    background-color: #ffff;
+    padding-left: 0;
+    z-index: 2;
+    transition: all 0.5s ease-in-out;
+    .closeNav {
+      font-size: 30px;
+      text-align: right;
+      margin: 10px 0;
+      .closeNav-icon {
+        padding-right: 20px;
+      }
+    }
+    a {
+      &:hover {
+        background-color: #cc0000;
+      }
+    }
+  }
+  .nav-overley {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: none;
+    z-index: 1;
+  }
   .profile {
     padding: 15px;
   }
 }
+
+// Mobil: width < 740px
+@media only screen and (max-width: 46.1875em) {
+  nav {
+    .nav-pc {
+      display: none !important;
+    }
+    .listIcon-wrapper {
+      display: flex !important;
+      justify-content: center;
+      align-items: center;
+      margin-left: 20px;
+      .listIcon {
+      }
+    }
+    .nav-mobile {
+      width: 100%;
+      right: 0;
+    }
+  }
+}
+// Tablet: width >= 740px and width < 1024px
+@media only screen and (max-width: 46.1875em) and (max-width: 63.9375em) {
+} ;

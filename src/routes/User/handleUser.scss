@@ -14,16 +14,18 @@
         margin-bottom: 5px;
       }
       input {
-        width: 250px;
+        width: 14.375em;
         padding: 3px;
         font-size: 16px;
         border-radius: 5px;
         text-indent: 5px;
+        border: 2px solid black;
       }
       select {
-        width: 200px;
+        width: 15em;
         height: 28.5px;
         border-radius: 5px;
+        border: 2px solid black;
         option {
           font-size: 18px;
           padding: 4px;
@@ -42,14 +44,61 @@
       padding: 5px;
       background-color: rgb(79, 96, 227);
       border: 1px solid rgb(79, 96, 227);
+      border-radius: 20px;
       color: #ffff;
       &:hover {
         cursor: pointer;
       }
-      border-radius: 20px;
       .iconBtn {
         padding-right: 5px;
         color: #ffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+}
+
+// Mobil: width < 740px
+@media only screen and (max-width: 46.1875em) {
+  .controller {
+    form {
+      flex-direction: column;
+      .formGroup {
+        margin-left: 20px;
+      }
+    }
+    .function {
+      button {
+        // font-size: 0;
+        justify-content: center;
+        width: 33%;
+        .describe {
+          display: none;
+        }
+        .iconBtn {
+          display: flex;
+          font-size: 30px;
+        }
+      }
+    }
+  }
+}
+// Tablet: width >= 740px and width < 1024px
+@media only screen and (min-width: 46.1875em) and (max-width: 63.9375em) {
+  .controller {
+    form {
+      flex-wrap: wrap;
+      .formGroup {
+        width: 40% !important;
+        margin-left: 20px;
+      }
+    }
+    .function {
+      button {
+        .iconBtn {
+        }
       }
     }
   }

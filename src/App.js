@@ -4,23 +4,25 @@ import "./App.scss";
 import Navigation from "./components/Navigation/Navigation";
 import User from "./routes/User/User.js";
 import Customer from "./routes/Customer/Customer";
-import Product from "./routes/Product/Product";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Dashboard from "./routes/Dashboard/Dashboard";
+import { BrowserRouter, Routes, Route, HashRouter } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Counter from "./components/Counter/Counter";
+
 function Heading(props) {
   return <h1>{props.router_name}</h1>;
 }
-function App() {
+
+function App(props) {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div className="App">
         <Navigation />
         <div className="router-content">
           <Routes>
-            <Route path="/product" element={<Product />} />
-            <Route path="/customer" element={<Customer />} />
-            <Route exact path="/user" element={<User />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/user" element={<User />} />
           </Routes>
         </div>
         <ToastContainer
@@ -32,13 +34,14 @@ function App() {
           rtl={false}
           pauseOnFocusLoss
           draggable
-          pauseOnHover  
+          pauseOnHover
           theme="light"
         />
         <ToastContainer />
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
+
 export { Heading };
 export default App;

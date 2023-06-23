@@ -1,20 +1,32 @@
 @import url("https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@200&family=Pacifico&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200&display=swap");
-
+.selectSortUsers__container {
+  text-align: right;
+  margin-bottom: 10px;
+  select {
+    width: 13em;
+    height: 1.875em;
+  }
+}
 .manager_user_table {
   margin-right: 0;
   width: 100%;
   border-collapse: collapse;
+  height: 50px;
+  overflow: auto;
   tr {
     text-align: left;
+    border: 1px solid #000;
     &:nth-child(odd) {
       background: #d1cfcf;
+    }
+    &:hover {
+      background-color: #8e8b8b;
     }
     th,
     td {
       border: 1px solid #000;
       padding: 8px;
-      //   font-family: "Roboto Slab", serif;
     }
     th {
       background-color: #eb3926;
@@ -24,7 +36,7 @@
     td {
       font-size: 18px;
       &.active {
-        color: rgb(60, 173, 60);
+        color: rgb(3, 216, 3);
       }
       &.non_active {
         color: rgb(245, 0, 0);
@@ -51,16 +63,17 @@
           color: rgb(239, 6, 6);
         }
       }
-      input {
+      .editting {
         width: 80%;
-        height: 22px;
-        font-size: 18px;
-      }
-      select {
-        width: 80%;
-        height: 22px;
-        font-size: 18px;
+        height: 1.25em;
+        font-size: 90%;
       }
     }
   }
+}
+// Mobil: width < 740px
+@media only screen and (max-width: 46.1875em) {
+}
+// Tablet: width >= 740px and width < 1024px
+@media only screen and (min-width: 46.1875em) and (max-width: 63.9375em) {
 }
